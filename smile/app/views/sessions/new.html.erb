@@ -11,12 +11,12 @@
 
       <%= f.label :remember_me, class: "checkbox inline" do %>
         <%= f.check_box :remember_me, class: 'form-control' %>
-        <span>Remember me on this computer</span>
+        <span>保存する</span>
       <% end %>
 
       <%= f.submit "ログイン", class: "btn btn-primary" %>
     <% end %>
 
-    <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+    <p>アカウントを持っていない場合は<%= link_to "こちら", signup_path %>から</p>
   </div>
 </div>

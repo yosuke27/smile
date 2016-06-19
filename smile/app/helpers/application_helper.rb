@@ -6,4 +6,8 @@ module ApplicationHelper
             "#{page_title} | #{Constants::APP_NAME}"
         end
     end
+    
+    def now
+        Time.zone.now
+    end
 end

@@ -3,11 +3,10 @@
   <h1>毎日ニコニコ過ごそう。</h1>
 
   <h2>
-    <a href="">ニコニコカレンダー</a>
-    とは？
+    ニコニコカレンダーって何？って方は
+    <%= link_to 'こちら', about_path %>
+    から
   </h2>
 
   <%= link_to "今すぐ登録する", signup_path, class: "btn btn-lg btn-primary" %>
 </div>
-
-<%= link_to image_tag("rails.png", alt: "Rails logo"), 'http://rubyonrails.org/' %>
