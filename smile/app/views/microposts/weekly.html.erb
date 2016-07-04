@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Microposts</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+        <th></th>
+        <% @days.each do |day| %>
+        <th>
+            <div><%= day.to_time.strftime('%Y/%m/%d') %></div>
+        </th>
+        <% end %>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @users.each do |user| %>
+        <tr>
+            <td>
+                <div><%= gravatar_for user %></div>
+                <div><%= user.name %></div>
+            </td>
+            <% @days.each do |day| %>
+            <td>
+                <% content = user.microposts.find_by(datecode: day) %>
+                <% if !content.nil? then %>
+                    <ul class="wrap">
+                        <li class="content-mood-<%= content.mood %>">
+                            <div>
+                                <span><%= content.content %></span>
+                            </div>
+                        </li>
+                    </div>
+                <% end %>
+            </td>
+            <% end %>
+        </tr>
+        <% end %>
+    </tbody>
+</table>

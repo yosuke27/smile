@@ -8,11 +8,13 @@ class MicropostsController < ApplicationController
   end
   
   def weekly
+    create_sample_post
     sunday = last_sunday_datecode to_date_or_now params[:from]
     saturday = next_saturday_datecode to_date_or_now params[:from]
-
-    render text: sunday + " " + saturday 
-    #@microposts = Micropost.find_by(datecode: current_datecode)
+    @users = User.all
+    @from_datecode = sunday.to_time
+    @to_datecode = saturday.to_time
+    @days = (sunday..saturday).to_a
   end
   
 

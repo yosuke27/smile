@@ -8,6 +8,5 @@ class Micropost < ActiveRecord::Base
         elsif to.present?
             where('datecode <= ?', to)
         end
-        }
-    end
+    }
 end
