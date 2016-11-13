@@ -4,27 +4,38 @@ class MicropostsController < ApplicationController
   # GET /microposts
   # GET /microposts.json
   def index
+    redirect_to '/home'
     @microposts = Micropost.all
   end
   
   def weekly
-    create_sample_post
+    if not logged_in?
+      redirect_to '/'
+    end
+  
     sunday = last_sunday_datecode to_date_or_now params[:from]
     saturday = next_saturday_datecode to_date_or_now params[:from]
     @users = User.all
     @from_datecode = sunday.to_time
     @to_datecode = saturday.to_time
     @days = (sunday..saturday).to_a
+    datecode = to_datecode now
+    is_onechance = true
+    todaypost = Micropost.where("datecode = ?", datecode).count
+    todaypost_onechance = Micropost.where("datecode = ? and is_onechance = ?", datecode, is_onechance).count
+    @onechance_percent = (todaypost_onechance.to_f/todaypost.to_f*100).to_s
   end
   
 
   # GET /microposts/1
   # GET /microposts/1.json
   def show
+    redirect_to '/calender/weekly'
   end
 
   # GET /microposts/new
   def new
+    redirect_to '/calender/weekly'
     @micropost = Micropost.new
   end
 
@@ -35,7 +46,15 @@ class MicropostsController < ApplicationController
   # POST /microposts
   # POST /microposts.json
   def create
-    @micropost = Micropost.new(micropost_params)
+    if not logged_in?
+      redirect_to '/'
+    end
+    
+    user = current_user
+    item = micropost_params;
+    item[:datecode] = to_datecode now
+    item[:user_id] = user.id
+    @micropost = Micropost.new(item)
 
     respond_to do |format|
       if @micropost.save

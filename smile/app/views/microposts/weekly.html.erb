@@ -1,7 +1,54 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Microposts</h1>
+<h1>カレンダー</h1>
+<!-- Button to trigger modal -->
+<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">投稿する</button>
 
+<div>
+<label>ワンチャン具合</label>    
+<meter value="<%= @onechance_percent.to_i %>" min="0" max="100" low="40" haigh="100" optimum="60"></meter>
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">投稿する</h4>
+            </div>
+            <div class="modal-body">
+                <form action="/microposts" method="POST">
+                    <label>気分</label>
+                    <div class="overlay-post-icons">
+                        <div class="content-mood-1">
+                            <label for="mood-1">だめだめ</lebel>
+                            <input class="form-control" type="radio" id="mood-1" name="mood" value="1" />
+                        </div>
+                        <div class="content-mood-2">
+                            <label for="mood-2">ふつう</lebel>
+                            <input class="form-control" type="radio" id="mood-2" name="mood" value="2" />
+                        </div>
+                        <div class="content-mood-3">
+                            <label for="mood-3">最高！</lebel>
+                            <input class="form-control" type="radio" id="mood-3" name="mood" value="3" />
+                        </div>
+                    </div>
+                    <label>一言</label>
+                    <input class="form-control" type="text" id="content" value="" />
+                    <label>ワンチャン？</label>
+                    <input class="form-control" type="checkbox" id="is_onechance" />
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" data-dismiss="modal">閉じる</button>
+                <button type="button" id="send" class="btn btn-primary">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+ 
 <table class="table">
     <thead>
         <tr>
@@ -18,8 +65,10 @@
         <% @users.each do |user| %>
         <tr>
             <td>
-                <div><%= gravatar_for user %></div>
-                <div><%= user.name %></div>
+                <div class="user-wrap">
+                    <div><%= gravatar_for user %></div>
+                    <div><%= user.name %></div>
+                </div>
             </td>
             <% @days.each do |day| %>
             <td>
@@ -39,3 +88,40 @@
         <% end %>
     </tbody>
 </table>
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        // クリック
+        $('#send').on('click', function(){
+            
+            var checked = $('input[name=mood]:checked').val();
+            var content = $('#content').val();
+            var onechance = $('#is_onechance').prop('checked');
+            $.ajax({
+                type: 'POST',
+                url: '/microposts/',
+                timeout: 10000,
+                cache: true,
+                data: {
+                    'micropost[content]': content,
+                    'micropost[mood]': checked,
+                    'micropost[is_onechance]': onechance                    
+                },
+                dataType: 'json'
+            }).always(function(data_or_jqXHR, textStatus, jqXHR_or_errorThrown) {
+                location.reload();
+            });
+        });
+        
+        $('.overlay-post-icons div').click(function(){
+            var items = $('.overlay-post-icons div');
+            for (var i = 0; i < items.length; i++){
+                $(items[i]).removeClass('checked');
+            }
+
+            $(this).addClass('checked');
+        });
+
+    });
+</script>

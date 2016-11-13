@@ -1,5 +1,17 @@
 <h1>New Micropost</h1>
 
+<input type="text" name="created_at" class="12datepicker" /> 
+
+<div class="well">
+  <div id="datepicker" class="input-append date">
+    <input data-format="dd/MM/yyyy hh:mm:ss" type="text"></input>
+    <span class="add-on">
+      <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+      </i>
+    </span>
+  </div>
+</div>
+
 <%= render 'form' %>
 
 <%= link_to 'Back', microposts_path %>

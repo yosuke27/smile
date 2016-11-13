@@ -1,5 +1,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import 'bootstrap-datetimepicker';
 
 $light-gray: #777;
 
@@ -56,6 +57,8 @@ h2 {
     font-weight: normal;
     color: $light-gray;
 }
+
+
 
 p {
     font-size: 1.1em;
@@ -223,21 +226,23 @@ input {
 
 .content-mood-3 {
     background-image: image-url("3.png");
-    height: 80px;
-    width: 80px;
+    height: 100px;
+    width: 100px;
     background-size: contain;
 }
 
 .content-mood-2 {
     background-image: image-url("2.png");
-    height: 80px;
-    width: 80px;
+    height: 100px;
+    width: 100px;
+    background-size: contain;
 }
 
 .content-mood-1 {
     background-image: image-url("1.png");
-    height: 80px;
-    width: 80px;
+    height: 100px;
+    width: 100px;
+    background-size: contain;
 }
 
 @font-face {
@@ -322,4 +327,53 @@ ul {
   top: -40px;
   -webkit-transform: rotateY(0deg);
   transform: rotateY(0deg);
+}
+
+.btn {
+    color: #fff !important;
+    margin: 10px;
+}
+
+.overlay-post-icons {
+    display: -webkit-box;
+    margin: 10px auto;
+}
+
+.overlay-post-icons div label {
+    width: 100px;
+    height: 100px !important;
+}
+.overlay-post-icons input {
+    width: 0px;
+    line-height: 0px;
+    height: 0px !important;
+    display: none;
+}
+div .checked {
+    background-color: #605dff;
+    border-radius: 10px;
+}
+div.user-wrap{
+    display: inline-block;
+}
+
+
+meter {
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    width: 300px;
+    height: 20px;
+    vertical-align: bottom;
+}
+
+meter::-webkit-meter-horizontal-even-less-good-value {
+    background-color: #f00;
+    background-image: -webkit-gradient(
+                          linear,
+                          left top,
+                          left bottom,
+                          from(#ffafaf),
+                          to(#f00)
+                      );
+    /* 中略(グラデーション用指定2種類) */
 }

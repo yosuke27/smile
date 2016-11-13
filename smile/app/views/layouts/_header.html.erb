@@ -6,7 +6,7 @@
         <li><%= link_to "ホーム", root_path %></li>
         <li><%= link_to "詳しく", about_path %></li>
         <% if logged_in? %>
-          <li><%= link_to "カレンダー", microposts_path %></li>
+          <li><%= link_to "カレンダー", '/calender/weekly' %></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <div class="cred-wrap"><%= current_user.email %><%= gravatar_for current_user %></div><b class="cared"></b>
