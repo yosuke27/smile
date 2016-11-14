@@ -342,7 +342,11 @@ ul {
 .overlay-post-icons div label {
     width: 100px;
     height: 100px !important;
+    color: #FFF;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px #000, -1px 1px 1px #000, 1px -1px 1px #000, -1px -1px 1px #000;
 }
+
 .overlay-post-icons input {
     width: 0px;
     line-height: 0px;
@@ -350,7 +354,7 @@ ul {
     display: none;
 }
 div .checked {
-    background-color: #605dff;
+    background-color: #b2dced;
     border-radius: 10px;
 }
 div.user-wrap{
