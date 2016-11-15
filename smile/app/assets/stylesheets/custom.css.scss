@@ -296,31 +296,32 @@ ul {
   line-height: 1;
 }
 .wrap div span{
-  position: absolute;
-  opacity: 0;
-  top: -20px;
-  /* left: 0px; */
-  text-align: center;
-  height: auto;
-  padding: 10px;
-  border-radius: 2px;
-  background: #196090;
-  color: #fff;
-  font-size: 12px;
-  line-height: 1;
-  transition: .3s;
-  -webkit-transform: rotateY(180deg);
-  transform: rotateY(180deg);
+    position: absolute;
+    opacity: 0;
+    top: -20px;
+    width: 300px;
+    left: -100px;
+    text-align: center;
+    height: auto;
+    padding: 10px;
+    border-radius: 2px;
+    background: #196090;
+    color: #fff;
+    font-size: 12px;
+    line-height: 1;
+    transition: .3s;
+    -webkit-transform: rotateY(180deg);
+    transform: rotateY(180deg);
 }
 .wrap div span:after{
-  position: absolute;
-  top: 100%;
-  left: 30px;
-  height: 0;
-  width: 0;
-  border: 6px solid transparent;
-  border-top: 6px solid #196090;
-  content: "";
+    position: absolute;
+    top: 100%;
+    left: 145px;
+    height: 0;
+    width: 0;
+    border: 6px solid transparent;
+    border-top: 6px solid #196090;
+    content: "";
 }
 .wrap div:hover span{
   opacity: 1;

@@ -67,7 +67,7 @@
             <td>
                 <div class="user-wrap">
                     <div><%= gravatar_for user %></div>
-                    <div><%= user.name %></div>
+                    <div><a href="/users/<%= user.id %>"><%= user.name %></a></div>
                 </div>
             </td>
             <% @days.each do |day| %>
