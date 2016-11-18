@@ -9,9 +9,9 @@
 
       <%= f.password_field :password, class: 'form-control', placeholder: 'パスワード' %>
 
+      <%= f.check_box :remember_me, class: 'form-control' %>
       <%= f.label :remember_me, class: "checkbox inline" do %>
-        <%= f.check_box :remember_me, class: 'form-control' %>
-        <span>保存する</span>
+        保存する
       <% end %>
 
       <%= f.submit "ログイン", class: "btn btn-primary" %>
