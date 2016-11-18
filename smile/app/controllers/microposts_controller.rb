@@ -50,11 +50,27 @@ class MicropostsController < ApplicationController
       redirect_to '/'
     end
     
+    datecode = to_datecode now    
     user = current_user
     item = micropost_params;
-    item[:datecode] = to_datecode now
+    
+    if item[:content].nil?
+      return
+    end
+    
+    if item[:mood].nil?
+      return
+    end
+
+    item[:datecode] = datecode
     item[:user_id] = user.id
-    @micropost = Micropost.new(item)
+    target_item = user.microposts.find_by(datecode: datecode)
+    if target_item.nil?
+      @micropost = Micropost.new(item)
+    else
+      target_item.update(content: item[:content], mood: item[:mood], is_onechance: item[:is_onechance])
+      @micropost = target_item
+    end
 
     respond_to do |format|
       if @micropost.save

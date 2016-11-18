@@ -200,8 +200,6 @@ input {
 }
 
 .checkbox {
-  margin-top: -10px;
-  margin-bottom: 10px;
   span {
     margin-left: 20px;
     font-weight: normal;
@@ -223,6 +221,9 @@ input {
     background-color: rgba(255,255,255, 0);
 }
 
+.btn-default {
+    color: #000 !important;
+}
 
 .content-mood-3 {
     background-image: image-url("3.png");
@@ -298,7 +299,7 @@ ul {
 .wrap div span{
     position: absolute;
     opacity: 0;
-    top: -20px;
+    bottom: 80px;
     width: 300px;
     left: -100px;
     text-align: center;
@@ -309,9 +310,10 @@ ul {
     color: #fff;
     font-size: 12px;
     line-height: 1;
-    transition: .3s;
-    -webkit-transform: rotateY(180deg);
-    transform: rotateY(180deg);
+    transition: .4s;
+    -webkit-transform: rotateY(90deg);
+    transform: rotateY(90deg);
+    word-wrap: break-word;
 }
 .wrap div span:after{
     position: absolute;
@@ -323,18 +325,19 @@ ul {
     border-top: 6px solid #196090;
     content: "";
 }
-.wrap div:hover span{
-  opacity: 1;
-  top: -40px;
-  -webkit-transform: rotateY(0deg);
-  transform: rotateY(0deg);
+
+.wrap div:hover span {
+    opacity: 1;
+    bottom: 100px;
+    -webkit-transform: rotateY(0deg);
+    transform: rotateY(0deg);
 }
 
-.btn {
-    color: #fff !important;
-    margin: 10px;
+.meter-wrap {
+    float: right;
 }
 
+/* 選択アイコン周り */
 .overlay-post-icons {
     display: -webkit-box;
     margin: 10px auto;
@@ -354,14 +357,24 @@ ul {
     height: 0px !important;
     display: none;
 }
-div .checked {
-    background-color: #b2dced;
+.overlay-post-icons div.checked {
+    background-color: #e2edd7;
+}
+.overlay-post-icons div:hover {
+    background-color: #f0f5ec
+}
+.overlay-post-icons div {
+    -webkit-transition: background-color 0.2s linear;
+    transition: background-color 0.2s linear;
     border-radius: 10px;
 }
+/* 選択アイコン周り */
+
+
+
 div.user-wrap{
     display: inline-block;
 }
-
 
 meter {
     margin-top: 10px;
@@ -382,3 +395,67 @@ meter::-webkit-meter-horizontal-even-less-good-value {
                       );
     /* 中略(グラデーション用指定2種類) */
 }
+
+
+/* Checkbox 向け */
+input[type=checkbox] {
+    display: none;
+}
+
+.checkbox {
+    box-sizing: border-box;
+    -webkit-transition: background-color 0.2s linear;
+    transition: background-color 0.2s linear;
+    position: relative;
+    display: inline-block;
+    padding: 12px 12px 12px 42px;
+    border-radius: 8px;
+    background-color: #f6f7f8;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.checkbox:hover {
+    background-color: #e2edd7;
+}
+.checkbox:hover:after {
+    border-color: #53b300;
+}
+.checkbox:after {
+    -webkit-transition: border-color 0.2s linear;
+    transition: border-color 0.2s linear;
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    display: block;
+    margin-top: -10px;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #bbb;
+    border-radius: 6px;
+    content: '';
+}
+
+.checkbox:before {
+    -webkit-transition: opacity 0.2s linear;
+    transition: opacity 0.2s linear;
+    position: absolute;
+    top: 50%;
+    left: 21px;
+    display: block;
+    margin-top: -7px;
+    width: 5px;
+    height: 9px;
+    border-right: 3px solid #53b300;
+    border-bottom: 3px solid #53b300;
+    content: '';
+    opacity: 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+input[type=checkbox]:checked + .checkbox:before {
+  opacity: 1;
+}
+/* Checkbox 向け */
+
+
