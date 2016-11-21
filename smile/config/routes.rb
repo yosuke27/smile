@@ -10,7 +10,13 @@ Rails.application.routes.draw do
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
   get 'calender/weekly' => 'microposts#weekly'
-  resources :users
+  get 'calender/monthly' => 'microposts#monthly'
+  resources :users do
+    member do
+      get 'history'
+    end
+  end
+  
   resources :microposts do
     collection do
       get 'weekly'

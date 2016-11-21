@@ -69,6 +69,10 @@ p {
     line-height: 1.7em;
 }
 
+table div {
+    text-align: center;
+}
+
 /* header */
 
 #logo {
@@ -159,7 +163,6 @@ aside {
 
 .gravatar {
     float: left;
-    margin-right: 10px;
 }
 
 .gravatar_edit {

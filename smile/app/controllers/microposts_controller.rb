@@ -7,23 +7,49 @@ class MicropostsController < ApplicationController
     redirect_to '/home'
     @microposts = Micropost.all
   end
+
+  def monthly
+    if not logged_in?
+      redirect_to '/'
+    end
+  end
   
   def weekly
     if not logged_in?
       redirect_to '/'
     end
-  
-    sunday = last_sunday_datecode to_date_or_now params[:from]
-    saturday = next_saturday_datecode to_date_or_now params[:from]
-    @users = User.all
+    # today or selected date
+    target_date = to_date_or_now params[:from];
+    
+    # create 1 week list
+    sunday = last_sunday_datecode target_date
+    saturday = next_saturday_datecode target_date
     @from_datecode = sunday.to_time
     @to_datecode = saturday.to_time
-    @days = (sunday..saturday).to_a
+    
+    week_array = Array.new
+    tmp_date = sunday
+    while tmp_date <= saturday do
+      week_array.push(tmp_date)
+      tmp_date = to_datecode tmp_date.to_time.days_ago(-1)
+    end
+    
+    @days = week_array.to_a
+
+    # users 
+    @users = User.all
+
+    # create onechance_meter 
     datecode = to_datecode now
+    today_posts = Micropost.where("datecode = ?", datecode)
+    today_posts_count = today_posts.count
     is_onechance = true
-    todaypost = Micropost.where("datecode = ?", datecode).count
-    todaypost_onechance = Micropost.where("datecode = ? and is_onechance = ?", datecode, is_onechance).count
-    @onechance_percent = (todaypost_onechance.to_f/todaypost.to_f*100).to_s
+    today_posts_onechance = today_posts.where(is_onechance: is_onechance).count
+    @onechance_percent = (today_posts_onechance.to_f/today_posts_count.to_f*100).to_s
+
+    @prev_date = to_datecode target_date.days_ago(7)
+    @next_date = to_datecode target_date.days_ago(-7)
+    @posts_weekly = Micropost.where("datecode >= ? and datecode <= ?", sunday, saturday).to_a
   end
   
 

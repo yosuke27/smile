@@ -48,6 +48,10 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
+  
+  def history
+    @user = User.find(params[:id])
+  end
 
   # DELETE /users/1
   # DELETE /users/1.json

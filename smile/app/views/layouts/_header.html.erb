@@ -6,13 +6,14 @@
         <li><%= link_to "ホーム", root_path %></li>
         <li><%= link_to "詳しく", about_path %></li>
         <% if logged_in? %>
-          <li><%= link_to "カレンダー", '/calender/weekly' %></li>
+          <li><%= link_to "週間", '/calender/weekly' %></li>
+          <li><%= link_to "月間", '/calender/monthly' %></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <div class="cred-wrap"><%= current_user.email %><%= gravatar_for current_user %></div><b class="cared"></b>
             </a>
             <ul class="dropdown-menu">
-              <li><%= link_to "ヒストリ", '#' %></li>
+              <li><%= link_to "ヒストリ", "/users/"+current_user.id.to_s+"/history" %></li>
               <li><%= link_to "プロフィール", current_user %></li>
               <li><%= link_to "設定", edit_user_path(current_user) %></li>
               <li class="divider"></li>
