@@ -20,7 +20,7 @@ class MicropostsController < ApplicationController
     end
     # today or selected date
     target_date = to_date_or_now params[:from];
-    
+
     # create 1 week list
     sunday = last_sunday_datecode target_date
     saturday = next_saturday_datecode target_date
@@ -36,9 +36,6 @@ class MicropostsController < ApplicationController
     
     @days = week_array.to_a
 
-    # users 
-    @users = User.all
-
     # create onechance_meter 
     datecode = to_datecode now
     today_posts = Micropost.where("datecode = ?", datecode)
@@ -46,6 +43,10 @@ class MicropostsController < ApplicationController
     is_onechance = true
     today_posts_onechance = today_posts.where(is_onechance: is_onechance).count
     @onechance_percent = (today_posts_onechance.to_f/today_posts_count.to_f*100).to_s
+
+    # users 
+    @users = User.all.to_a.sort{ |a, b| b.microposts.last.updated_at <=> a.microposts.last.updated_at }
+    
 
     @prev_date = to_datecode target_date.days_ago(7)
     @next_date = to_datecode target_date.days_ago(-7)
