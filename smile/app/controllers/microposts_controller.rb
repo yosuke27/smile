@@ -45,7 +45,7 @@ class MicropostsController < ApplicationController
     @onechance_percent = (today_posts_onechance.to_f/today_posts_count.to_f*100).to_s
 
     # users 
-    @users = User.all.to_a.sort{ |a, b| b.microposts.last.updated_at <=> a.microposts.last.updated_at }
+    @users = User.all.to_a.select { |x| x.microposts.last != nil }.sort{ |a, b| b.microposts.last.updated_at <=> a.microposts.last.updated_at }
     
 
     @prev_date = to_datecode target_date.days_ago(7)
